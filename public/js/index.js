@@ -2,11 +2,7 @@ var socket = io();
 
 socket.on('connect', function () {
     console.log('Connected to server.')
-
-    socket.emit('createMessage', {
-        from: 'manav',
-        text: 'Sure!'
-    });
+    
 });
 
 socket.on('disconnect', function () {
