@@ -23,7 +23,7 @@ io.on('connection', (socket) => {
     socket.on('createMessage', (message, callback) => {
         console.log('createMessage:', JSON.stringify(message, undefined, 2));
         io.emit('newMessage', generateMessage(message.from, message.text));
-        callback('This is ackowledgement for the message');
+        callback();
     });
 
     socket.on('createLocationMessage', (coords) => {
