@@ -9,13 +9,24 @@ socket.on('disconnect', function () {
 });
 
 socket.on('newMessage', function (message) {
-    console.log('New message:', JSON.stringify(message, undefined, 2));
+    var formattedTime = moment(message.createdAt).format('h:mm a');
     var li = jQuery('<li></li>');
-    li.text(`${message.from}: ${message.text}`);
+    li.text(`${message.from} ${formattedTime}: ${message.text}`);
 
     jQuery('#messages').append(li);
 });
 
+
+socket.on('newLocationMessage', (message) => {
+    var formattedTime = moment(message.createdAt).format('h:mm a');
+    var li = jQuery('<li></li>');
+    var a = jQuery('<a target="_blank">My current location</a>');
+
+    li.text(`${message.from} ${formattedTime}: `);
+    a.attr('href', message.url);
+    li.append(a);
+    jQuery('#messages').append(li);
+});
 
 jQuery('#message-form').on('submit', function (e) {
     e.preventDefault();
@@ -28,16 +39,6 @@ jQuery('#message-form').on('submit', function (e) {
     }, function () {
         messageTextBox.val('');
     });
-});
-
-socket.on('newLocationMessage', (message) => {
-    var li = jQuery('<li></li>');
-    var a = jQuery('<a target="_blank">My current location</a>');
-
-    li.text(`${message.from}: `);
-    a.attr('href', message.url);
-    li.append(a);
-    jQuery('#messages').append(li);
 });
 
 var locationButton = jQuery('#send-location');
