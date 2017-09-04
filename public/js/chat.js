@@ -21,7 +21,7 @@ socket.on('connect', function () {
     
     socket.emit('join', params, function (error) {
         if (error){
-            alert(error);
+            alert2(error, 'Error', 'OK');
             window.location.href = '/';
         } else {
             console.log('No error');
@@ -104,3 +104,26 @@ locationButton.on('click', function () {
         alert('Unable to fetch location');
     });
 });
+
+function alert2(message, title, buttonText) {
+
+    buttonText = (buttonText == undefined) ? "Ok" : buttonText;
+    title = (title == undefined) ? "The page says:" : title;
+
+    var div = $('<div>');
+    div.html(message);
+    div.attr('title', title);
+    div.dialog({
+        autoOpen: true,
+        modal: true,
+        draggable: false,
+        resizable: false,
+        buttons: [{
+            text: buttonText,
+            click: function () {
+                $(this).dialog("close");
+                div.remove();
+            }
+        }]
+    });
+}
