@@ -55,6 +55,8 @@ socket.on('newMessage', function (message) {
     });
     // alertify.alert('New Message');
     jQuery('#messages').append(html);
+    var sound = document.getElementById("audio");
+    sound.play();
     scrollToBottom();
 });
 
