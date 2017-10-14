@@ -2,12 +2,24 @@
 
 <html>
 
-    <head> 
+    <head>
         <meta charset="utf-8">
         <title>Chat | ManavChat</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
         <link rel="stylesheet" href="/css/styles.css">
-    </head>
+    </head
+
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async='async'></script>
+    <script>
+        var OneSignal = window.OneSignal || [];
+        OneSignal.push(["init", {
+            appId: "YOUR_APP_ID",
+            autoRegister: true, /* Set to true to automatically prompt visitors */
+            notifyButton: {
+                enable: true /* Set to false to hide */
+            }
+    }]);
+    </script>
 
     <body class="chat">
 
@@ -27,7 +39,7 @@
                     <button>Send</button>
                 </form>
                 <button id="send-location">Send location</button>
-            </div>        
+            </div>
         </div>
 
         <script id="message-template" type="text/template">
